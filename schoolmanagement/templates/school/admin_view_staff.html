@@ -1,0 +1,77 @@
+{% extends 'school/adminbase.html' %}
+
+{% block content %}
+
+<head>
+
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    .space {
+      height: 330px;
+    }
+
+    .row {
+      margin: 10px;
+    }
+  </style>
+
+  <script type="text/javascript">
+    function confirmDelete() {
+      return confirm("Are you sure you want to delete this staff member?");
+    }
+  </script>
+
+</head>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h6 class="panel-title">Staff</h6>
+      </div>
+
+      <table class="table table-hover table-striped table-bordered" id="dev-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Salary</th>
+            <th>Joining Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        {% for t in staff %}
+        <tr>
+          <td>{{ t.get_name }}</td>
+          <td>{{ t.mobile }}</td>
+          <td>${{ t.salary }}</td>
+          <td>{{ t.joindate }}</td>
+          <td>
+            <a class="btn btn-primary btn-xs" href="{% url 'update-staff' t.id %}">
+              <span class="glyphicon glyphicon-edit"></span>
+            </a>
+            <a class="btn btn-danger btn-xs" href="{% url 'delete-staff-from-school' t.id %}" onclick="return confirmDelete();">
+              <span class="glyphicon glyphicon-trash"></span>
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="space"></div>
+
+{% endblock content %}
