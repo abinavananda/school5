@@ -1,4 +1,4 @@
-......requirements.....
+requirements:  
 pip install---
 asgiref,
 Django,
